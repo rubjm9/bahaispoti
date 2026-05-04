@@ -2,6 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 
 // Cargar historial desde localStorage
 const loadHistoryFromStorage = () => {
+  if (typeof window === 'undefined') {
+    return [];
+  }
   try {
     const stored = localStorage.getItem('bahaisongs_history');
     return stored ? JSON.parse(stored) : [];

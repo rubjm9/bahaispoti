@@ -15,13 +15,15 @@ export const store = configureStore({
 
 // Inicializar tema al cargar
 const initializeTheme = () => {
+  if (typeof document === 'undefined') return;
   const state = store.getState();
   const theme = state.theme.theme;
   document.documentElement.setAttribute('data-theme', theme);
 };
 
-// Suscribirse a cambios de tema
+// Suscribirse a cambios de tema (solo en navegador)
 store.subscribe(() => {
+  if (typeof document === 'undefined') return;
   const state = store.getState();
   const theme = state.theme.theme;
   document.documentElement.setAttribute('data-theme', theme);

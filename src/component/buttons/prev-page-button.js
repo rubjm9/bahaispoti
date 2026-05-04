@@ -1,12 +1,14 @@
-import { useNavigate } from "react-router-dom";
+'use client';
+
+import { useRouter } from "next/navigation";
 import * as Icons from '../icons';
 
 function PrevPageBtn() {
-    const navigate = useNavigate();
+    const router = useRouter();
 
     return (
             <button className="PrevBtn" onClick={() => {
-                navigate(-1); // goBack equivalent
+                router.back();
             }}>
                 <Icons.Prevpage />
             </button>

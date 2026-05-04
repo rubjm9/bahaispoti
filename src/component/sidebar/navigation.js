@@ -1,29 +1,38 @@
+'use client';
+
 import React from 'react'
-import { NavLink, useLocation } from "react-router-dom";
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { MENU } from '../../constants'
 import TextBoldM from '../text/text-bold-m';
 import styles from './navigation.module.css';
 
+function isMenuActive(pathname, menuPath) {
+  if (pathname == null) return false;
+  if (menuPath === '/') return pathname === '/';
+  return pathname === menuPath || pathname.startsWith(`${menuPath}/`);
+}
+
 function Navigation() {
-  const router = useLocation();
+  const pathname = usePathname();
 
   return (
     <div className={styles.navBtns}>
       {MENU.map((menu) => {
-        const selected = router.pathname === menu.path
+        const selected = pathname === menu.path
+        const activeClass = isMenuActive(pathname, menu.path) ? 'activeLink' : '';
 
         return (
-            <NavLink 
-              to={menu.path} 
-              end={menu.path === '/'}
-              className={({ isActive }) => isActive ? 'activeLink' : ''}
+            <Link
+              href={menu.path}
+              className={activeClass}
               key={menu.title}
             >
                 <button className={styles.button}>
                     {selected ? menu.iconSelected : menu.icon}
                     <TextBoldM>{menu.title}</TextBoldM>
                 </button>
-            </NavLink>
+            </Link>
             );
       })}
     </div>

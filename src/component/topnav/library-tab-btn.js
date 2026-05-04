@@ -1,21 +1,30 @@
-import { NavLink } from "react-router-dom";
-import TitleBoldM from '../text/text-bold-m';
+'use client';
+
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import TextBoldM from '../text/text-bold-m';
 
 import { LIBRARYTABS } from '../../constants/index';
 import styles from './library-tab-btn.module.css';
 
 function LibraryTabBtn() {
+    const pathname = usePathname();
     return (
         <nav className={styles.TabNav}>
             {LIBRARYTABS.map((item) => {
+                const isActive = pathname != null && pathname === item.path;
                 return (
-                    <NavLink key={item.title} className={styles.tabBtn} to={item.path} exact activeClassName="activeTabBtn">
-                        <TitleBoldM>{item.title}</TitleBoldM>
-                    </NavLink>
+                    <Link
+                        key={item.title}
+                        href={item.path}
+                        className={`${styles.tabBtn}${isActive ? ' activeTabBtn' : ''}`}
+                    >
+                        <TextBoldM>{item.title}</TextBoldM>
+                    </Link>
                 );
             })}
         </nav>
     );
 }
-  
+
 export default LibraryTabBtn;

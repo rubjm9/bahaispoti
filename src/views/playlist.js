@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeTrack } from '../store/slices/playerSlice';
 import { selectTrackData } from '../store/slices/playerSlice';
@@ -19,7 +19,8 @@ function PlaylistPage() {
 	const trackData = useSelector(selectTrackData);
 	const[playlistIndex, setPlaylistIndex] = useState(undefined);
 	const[isthisplay, setIsthisPlay] = useState(false);
-	const { path } = useParams();
+	const params = useParams();
+	const path = params?.path;
 
 	function changeBg(color){
 		document.documentElement.style.setProperty('--hover-home-bg', color);

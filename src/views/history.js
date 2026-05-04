@@ -1,41 +1,41 @@
 import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { selectFavorites } from '../store/slices/favoritesSlice';
+import Link from 'next/link';
+import { selectHistory } from '../store/slices/historySlice';
 import { PLAYLIST } from '../data/index';
 import TitleM from '../component/text/title-m';
 import TextRegularM from '../component/text/text-regular-m';
 import PlaylistTrack from '../component/playlist/playlist-track';
 import Topnav from '../component/topnav/topnav';
-import styles from './favorites.module.css';
+import styles from './history.module.css';
 
-function Favorites() {
-    const favorites = useSelector(selectFavorites);
+function History() {
+    const history = useSelector(selectHistory);
 
-    const favoriteSongs = useMemo(() => {
-        return favorites
-            .map(fav => {
-                const playlist = PLAYLIST[fav.playlistIndex];
+    const historySongs = useMemo(() => {
+        return history
+            .map(item => {
+                const playlist = PLAYLIST[item.playlistIndex];
                 if (!playlist) return null;
-                const song = playlist.playlistData[fav.songIndex];
+                const song = playlist.playlistData[item.songIndex];
                 if (!song) return null;
                 return {
-                    ...fav,
+                    ...item,
                     song,
                     playlist
                 };
             })
             .filter(Boolean);
-    }, [favorites]);
+    }, [history]);
 
-    if (favoriteSongs.length === 0) {
+    if (historySongs.length === 0) {
         return (
             <div className={styles.container}>
                 <Topnav />
                 <div className={styles.empty}>
-                    <TitleM>Favoritos</TitleM>
-                    <TextRegularM>No tienes canciones favoritas aún.</TextRegularM>
-                    <TextRegularM>Agrega canciones a favoritos desde cualquier página de canción.</TextRegularM>
+                    <TitleM>Historial</TitleM>
+                    <TextRegularM>No has reproducido ninguna canción aún.</TextRegularM>
+                    <TextRegularM>Las canciones que reproduzcas aparecerán aquí.</TextRegularM>
                 </div>
             </div>
         );
@@ -45,18 +45,18 @@ function Favorites() {
         <div className={styles.container}>
             <Topnav />
             <div className={styles.content}>
-                <TitleM>Favoritos</TitleM>
+                <TitleM>Historial de reproducción</TitleM>
                 <div className={styles.list}>
-                    {favoriteSongs.map((fav) => (
+                    {historySongs.map((item) => (
                         <Link 
-                            key={fav.id} 
-                            to={`/song/${fav.song.index}`}
+                            key={item.id} 
+                            href={`/song/${item.song.index}`}
                             className={styles.songLink}
                         >
                             <PlaylistTrack 
                                 data={{
-                                    listType: fav.playlist.type,
-                                    song: fav.song
+                                    listType: item.playlist.type,
+                                    song: item.song
                                 }}
                             />
                         </Link>
@@ -67,4 +67,4 @@ function Favorites() {
     );
 }
 
-export default Favorites;
+export default History;

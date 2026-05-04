@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import * as React from "react";
 import styles from './Logo.module.css';
 
 function SvgLogo(props) {
   return (
-    <Link className={styles.link} to="/">
+    <Link className={styles.link} href="/">
       <svg
         className={styles.logo}
         xmlns="http://www.w3.org/2000/svg"

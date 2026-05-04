@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import Topnav from '../component/topnav/topnav';
 import TitleM from '../component/text/title-m';
 import TextRegularM from '../component/text/text-regular-m';
@@ -50,7 +50,7 @@ function Search(){
                                                     className={styles.searchResultItem}
                                                     onClick={() => handleSongClick(song.playlistIndex, song.songIndex)}
                                                 >
-                                                    <Link to={`/song/${song.index}`}>
+                                                    <Link href={`/song/${song.index}`}>
                                                         <TextRegularM>{song.songName}</TextRegularM>
                                                         <TextRegularM><small>{song.songArtist}</small></TextRegularM>
                                                     </Link>

@@ -1,28 +1,27 @@
-import { useState, useEffect } from 'react'
+import { useState, useLayoutEffect } from 'react'
 
+/**
+ * Tamaño de ventana estable para SSR/hidratación: el primer render en servidor
+ * y cliente usa width/height undefined; la medición real ocurre en useLayoutEffect.
+ */
 function useWindowSize() {
-  const isClient = typeof window === 'object'
+  const [windowSize, setWindowSize] = useState(() => ({
+    width: undefined,
+    height: undefined,
+  }))
 
-  function getSize() {
-    return {
-      width: isClient ? window.innerWidth : undefined,
-      height: isClient ? window.innerHeight : undefined
-    }
-  }
-
-  const [windowSize, setWindowSize] = useState(getSize)
-
-  useEffect(() => {
-    if (!isClient) {
-      return false
+  useLayoutEffect(() => {
+    function getSize() {
+      return {
+        width: window.innerWidth,
+        height: window.innerHeight,
+      }
     }
 
-    function handleResize() {
-      setWindowSize(getSize())
-    }
+    setWindowSize(getSize())
 
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
+    window.addEventListener('resize', getSize)
+    return () => window.removeEventListener('resize', getSize)
   }, [])
 
   return windowSize

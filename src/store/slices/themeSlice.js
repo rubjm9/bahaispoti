@@ -2,6 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 
 // Cargar tema desde localStorage o detectar preferencia del sistema
 const getInitialTheme = () => {
+  if (typeof window === 'undefined') {
+    return 'dark';
+  }
   try {
     const stored = localStorage.getItem('bahaisongs_theme');
     if (stored) {
@@ -31,8 +34,9 @@ const themeSlice = createSlice({
       // Persistir en localStorage
       try {
         localStorage.setItem('bahaisongs_theme', action.payload);
-        // Aplicar tema al documento
-        document.documentElement.setAttribute('data-theme', action.payload);
+        if (typeof document !== 'undefined') {
+          document.documentElement.setAttribute('data-theme', action.payload);
+        }
       } catch (error) {
         console.error('Error saving theme to localStorage:', error);
       }
@@ -42,7 +46,9 @@ const themeSlice = createSlice({
       state.theme = newTheme;
       try {
         localStorage.setItem('bahaisongs_theme', newTheme);
-        document.documentElement.setAttribute('data-theme', newTheme);
+        if (typeof document !== 'undefined') {
+          document.documentElement.setAttribute('data-theme', newTheme);
+        }
       } catch (error) {
         console.error('Error saving theme to localStorage:', error);
       }

@@ -86,6 +86,8 @@ const Audio = forwardRef(({ trackData, handleDuration, handleCurrentTime, isPlay
   },
 );
 
+Audio.displayName = 'Audio';
+
 Audio.propTypes = {
     handleDuration: PropTypes.func.isRequired,
     handleCurrentTime: PropTypes.func.isRequired,

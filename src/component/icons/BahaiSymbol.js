@@ -5,7 +5,7 @@ function BahaiSymbol() {
     return (
         <div className={styles.logo}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" className={styles.bahaiSymbol}>
-                <title>Símbolo Bahá'í</title>
+                <title>{'Símbolo Bahá\u2019í'}</title>
                 
                 {/* Fondo con gradiente */}
                 <defs>

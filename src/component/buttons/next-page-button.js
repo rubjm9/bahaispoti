@@ -1,12 +1,14 @@
-import { useNavigate } from "react-router-dom";
+'use client';
+
+import { useRouter } from "next/navigation";
 import * as Icons from '../icons';
 
 function NextPageBtn() {
-    const navigate = useNavigate();
+    const router = useRouter();
 
     return (
             <button className="NextBtn" onClick={() => {
-                navigate(1); // goForward equivalent
+                router.forward();
             }}>
                 <Icons.Nextpage />
             </button>

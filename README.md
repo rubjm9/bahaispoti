@@ -1,77 +1,55 @@
-# BahaiSongs - Reproductor de Música Bahá'í
+# BahaiSongs - Reproductor de música bahá'í
 
-Reproductor web de música bahá'í basado en React. Incluye letras de canciones para facilitar el canto grupal en reuniones bahá'ís.
+Reproductor web de música bahá'í con Next.js (App Router), React 18 y Redux Toolkit. Incluye letras de canciones para facilitar el canto grupal en reuniones bahá'ís.
 
-## 🚀 Cómo ejecutar la aplicación en local
+## Requisitos previos
 
-### Requisitos previos
-- Node.js (versión 16 o superior)
-- npm (incluido con Node.js)
+- Node.js 18 o superior recomendado
+- npm
 
-### Pasos para ejecutar
+## Pasos para ejecutar en local
 
-1. **Instalar dependencias** (si aún no lo has hecho):
+1. Instalar dependencias:
+
 ```bash
 npm install
 ```
 
-2. **Iniciar el servidor de desarrollo**:
-```bash
-npm start
-```
-
-La aplicación se abrirá automáticamente en tu navegador en `http://localhost:3000`
-
-### ⚙️ Configuración del puerto
-
-Si el puerto 3000 está ocupado, puedes usar otro puerto:
+2. Servidor de desarrollo (Next.js):
 
 ```bash
-PORT=3001 npm start
+npm run dev
 ```
 
-### 📝 Notas importantes
+Abre [http://localhost:3000](http://localhost:3000).
 
-- **Hot Reload**: Los cambios en el código se reflejarán automáticamente en el navegador
-- **Puerto por defecto**: 3000 (puede cambiarse con la variable de entorno `PORT`)
-- Ya no es necesario usar `NODE_OPTIONS` gracias a la actualización a react-scripts 5.0.1
+3. Otro puerto:
 
-## 🛠️ Scripts disponibles
+```bash
+PORT=3001 npm run dev
+```
 
-- `npm start` - Inicia el servidor de desarrollo
-- `npm run build` - Crea una versión optimizada para producción
-- `npm test` - Ejecuta los tests
-- `npm run icon` - Genera componentes de iconos desde SVG
+## Scripts
 
-## 📦 Tecnologías utilizadas
+- `npm run dev` — desarrollo (`next dev`)
+- `npm run build` — compilación de producción (`next build`)
+- `npm start` — sirve el build (`next start`, tras `npm run build`)
+- `npm test` — tests con Jest (`jest`)
+- `npm run lint` — ESLint (`next lint`)
+- `npm run icon` — genera componentes de iconos desde SVG
 
-* React 18.2.0
-* Redux Toolkit 2.0.1 (gestión de estado)
-* React Router DOM 6.21.1 (navegación)
-* Fuse.js 7.0.0 (búsqueda difusa)
-* CSS Modules (estilos)
-* React Scripts 5.0.1
+## Estructura relevante
 
-## ✨ Funcionalidades
+- `app/` — rutas App Router y layouts (shell con sidebar y reproductor en `app/(main)/layout.tsx`).
+- `src/views/` — pantallas de la app (antes `src/pages/`; el nombre `pages` reservaba el Pages Router de Next).
+- `src/component/`, `src/store/`, `src/data/`, etc. — lógica y UI compartida.
 
-### Características principales
-- 🎵 Reproductor de música con controles completos
-- 📝 Letras sincronizadas (cuando están disponibles)
-- 🎤 Modo presentación fullscreen para reuniones
-- ❤️ Sistema de favoritos
-- 📚 Historial de reproducción
-- 🔍 Búsqueda avanzada con Fuse.js
-- 📱 PWA (Progressive Web App) - Instalable en dispositivos móviles
-- ⚡ Lazy loading de componentes para mejor rendimiento
-- 🎨 Interfaz moderna y responsive
+## Tecnologías
 
-### Nuevas funcionalidades
-- **Letras sincronizadas**: Visualiza las letras que se sincronizan con la música (requiere datos de timestamps)
-- **Temas claro/oscuro**: Cambia entre tema claro y oscuro según tu preferencia
-- **Compartir canciones**: Comparte canciones y playlists usando Web Share API o copia al portapapeles
-- **Accesibilidad mejorada**: ARIA labels, roles semánticos y navegación por teclado
-- **Tests unitarios**: Tests para funcionalidades críticas del reproductor
-- **Modo presentación**: Vista fullscreen optimizada para mostrar letras en reuniones
-- **Favoritos**: Guarda tus canciones favoritas para acceso rápido
-- **Historial**: Revisa las últimas 50 canciones que has reproducido
-- **Búsqueda mejorada**: Búsqueda difusa en nombres, artistas y letras de canciones
+- Next.js 16 (App Router, Turbopack en `next dev` / `next build`)
+- TypeScript (configuración en `app/` y `tsconfig.json`; el código en `src/` sigue siendo mayoritariamente JavaScript con `allowJs`)
+- React 18
+- Redux Toolkit y react-redux
+- CSS Modules
+
+La navegación usa `next/link` y `next/navigation` (antes React Router DOM 6).

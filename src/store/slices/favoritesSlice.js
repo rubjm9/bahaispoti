@@ -2,6 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 
 // Cargar favoritos desde localStorage
 const loadFavoritesFromStorage = () => {
+  if (typeof window === 'undefined') {
+    return [];
+  }
   try {
     const stored = localStorage.getItem('bahaisongs_favorites');
     return stored ? JSON.parse(stored) : [];

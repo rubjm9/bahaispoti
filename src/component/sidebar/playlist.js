@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 import styles from './playlist.module.css';
 
@@ -32,7 +32,7 @@ function Playlist() {
         <div>
           {PLAYLIST.filter((item) => item.type === 'playlist').map((list) => {
             return (
-              <Link to={`/playlist/${list.link}`} key={list.title}>
+              <Link href={`/playlist/${list.link}`} key={list.title}>
                   <TextRegularM>{list.title}</TextRegularM>
               </Link>
             );

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useRouter } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeTrack, playPause } from '../store/slices/playerSlice';
 import { selectTrackData, selectIsPlaying, selectCurrentTime } from '../store/slices/playerSlice';
@@ -9,8 +9,9 @@ import * as Icons from '../component/icons';
 import styles from './presentation-mode.module.css';
 
 function PresentationMode() {
-    const { songId } = useParams();
-    const navigate = useNavigate();
+    const params = useParams();
+    const songId = params?.songId;
+    const router = useRouter();
     const dispatch = useDispatch();
     const trackData = useSelector(selectTrackData);
     const isPlaying = useSelector(selectIsPlaying);
@@ -132,7 +133,7 @@ function PresentationMode() {
         if (document.fullscreenElement) {
             document.exitFullscreen();
         }
-        navigate(-1);
+        router.back();
     };
 
     if (!song || !playlist) {

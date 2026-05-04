@@ -2,7 +2,7 @@ import React, { useEffect, useState, memo } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { changeTrack } from '../../store/slices/playerSlice';
 import { selectTrackData, selectIsPlaying } from '../../store/slices/playerSlice';
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import TextBoldL from '../text/text-bold-l';
 import PlayButton from '../buttons/play-button';
 
@@ -24,7 +24,7 @@ function PlaylistCardS(props){
 
     return (
         <div className={styles.PlaylistCardSBox}>
-            <Link to={`/playlist/${props.data.link}`} onMouseOver={changeTheme}>
+            <Link href={`/playlist/${props.data.link}`} onMouseOver={changeTheme}>
                 <div className={styles.PlaylistCardS}>
                     <div className={styles.ImgBox}>
                         <img src={props.data.imgUrl} alt={`${props.data.title}`} />

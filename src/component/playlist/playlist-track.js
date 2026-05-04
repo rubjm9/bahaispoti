@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { playPause } from '../../store/slices/playerSlice';
 import { selectTrackData, selectIsPlaying } from '../../store/slices/playerSlice';
 import TextBoldL from "../text/text-bold-l";
@@ -51,7 +51,7 @@ function PlaylistTrack(props) {
 			{props.data.listType === "álbum" ? "" : <img src={props.data.song.songimg} />}
 
 			<span>
-				<Link to={`/song/${props.data.song.index}`} className={styles.songLink}>
+				<Link href={`/song/${props.data.song.index}`} className={styles.songLink}>
 					<TextBoldL>{props.data.song.songName}</TextBoldL>
 					<TextRegularM>{props.data.song.songArtist}</TextRegularM>
 				</Link>

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
 import TitleM from '../component/text/title-m';
 import Topnav from '../component/topnav/topnav';
 import PlaylistCardM from '../component/cards/playlist-card-m'
@@ -7,23 +6,18 @@ import { PLAYLIST } from "../data/index";
 
 import styles from "./library.module.css";
 
-function Library(){
+export function LibraryShell({ children }) {
     return (
         <div className={styles.LibPage}>
                 <Topnav tabButtons={true}/>
                 <div className={styles.Library}>
-                        <Routes>
-                            <Route index element={<PlaylistTab />} />
-                            <Route path="podcasts" element={<PodcastTab />} />
-                            <Route path="artists" element={<ArtistTab />} />
-                            <Route path="albums" element={<AlbumTab />} />
-                        </Routes>
+                        {children}
                 </div>
         </div>
     );
 }
 
-function PlaylistTab(){
+export function PlaylistTab(){
     return (
         <div>
             <TitleM>Çalma Listeleri</TitleM>
@@ -41,10 +35,10 @@ function PlaylistTab(){
     );
 }
 
-function PodcastTab(){
+export function PodcastTab(){
     return (
         <div>
-            <TitleM>Podcast'ler</TitleM>
+            <TitleM>{'Podcast\u2019ler'}</TitleM>
             <div className={styles.Grid}>
                 {PLAYLIST.filter(item => item.type === 'podcast').map((item) => {
                     return (
@@ -59,7 +53,7 @@ function PodcastTab(){
     );
 }
 
-function ArtistTab(){
+export function ArtistTab(){
     return (
         <div>
             <TitleM>Sanatçılar</TitleM>
@@ -67,7 +61,7 @@ function ArtistTab(){
     );
 }
 
-function AlbumTab(){
+export function AlbumTab(){
     return (
         <div>
             <TitleM>Albümler</TitleM>
@@ -84,5 +78,3 @@ function AlbumTab(){
         </div>
     );
 }
-
-export default Library;
