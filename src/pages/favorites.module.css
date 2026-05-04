@@ -1,0 +1,29 @@
+.container {
+    padding: 1rem;
+    min-height: 100vh;
+}
+
+.content {
+    margin-top: 2rem;
+}
+
+.list {
+    margin-top: 1.5rem;
+}
+
+.songLink {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.empty {
+    margin-top: 3rem;
+    text-align: center;
+    padding: 2rem;
+}
+
+.empty > * {
+    margin-bottom: 1rem;
+}

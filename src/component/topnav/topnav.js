@@ -2,21 +2,23 @@ import PrevPageBtn from '../buttons/prev-page-button';
 import NextPageBtn from '../buttons/next-page-button';
 import SearchBox from './search-box';
 import LibraryTabBtn from './library-tab-btn';
+import ThemeToggle from '../common/ThemeToggle';
 
 import styles from './topnav.module.css';
 
-function Topnav({search = false, tabButtons = false}) {
+function Topnav({search = false, tabButtons = false, searchBox}) {
     return (
-      <nav className={styles.Topnav}>
+      <nav className={styles.Topnav} role="navigation" aria-label="Navegación principal">
           <div>
                 <span>
                     <PrevPageBtn />
                     <NextPageBtn />
-                    { search ? <SearchBox /> : '' }
+                    { search ? (searchBox || <SearchBox />) : '' }
                     { tabButtons ? <LibraryTabBtn /> : '' }
                 </span>
                 <span>
-                    <button className={styles.ProfileBtn}>
+                    <ThemeToggle />
+                    <button className={styles.ProfileBtn} aria-label="Perfil de usuario">
                         Oğuzhan Ulukaya
                     </button>
                 </span>

@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
-import { connect } from 'react-redux';
-import { changeTrack } from '../../actions';
+import React, { useEffect, useState, memo } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { changeTrack } from '../../store/slices/playerSlice';
+import { selectTrackData, selectIsPlaying } from '../../store/slices/playerSlice';
 import { Link } from "react-router-dom";
 import TextBoldL from "../text/text-bold-l";
 import TextRegularM from '../text/text-regular-m';
@@ -9,11 +10,14 @@ import PlayButton from '../buttons/play-button';
 import styles from "./playlist-card-m.module.css";
 
 function PlaylistCardM(props) {
+	const dispatch = useDispatch();
+	const trackData = useSelector(selectTrackData);
+	const isPlaying = useSelector(selectIsPlaying);
 	const[isthisplay, setIsthisPlay] = useState(false)
 
 	useEffect(() => {
-		setIsthisPlay(parseInt(props.data.index) === props.trackData.trackKey[0])
-	})
+		setIsthisPlay(parseInt(props.data.index) === trackData.trackKey[0])
+	}, [props.data.index, trackData.trackKey])
 
 	return (
 		<div className={styles.PlaylistCardSBox}>
@@ -29,8 +33,8 @@ function PlaylistCardM(props) {
 				</div>
 			</Link>
 			<div 
-				onClick={() => props.changeTrack([parseInt(props.data.index), 0])} 
-				className={`${styles.IconBox} ${isthisplay&&props.isPlaying ? styles.ActiveIconBox : ''}`}
+				onClick={() => dispatch(changeTrack([parseInt(props.data.index), 0]))} 
+				className={`${styles.IconBox} ${isthisplay&&isPlaying ? styles.ActiveIconBox : ''}`}
 			>
 				<PlayButton isthisplay={isthisplay} />
 			</div>
@@ -38,11 +42,4 @@ function PlaylistCardM(props) {
 	);
 }
 
-const mapStateToProps = (state) => {
-	return {
-		trackData: state.trackData,
-		isPlaying: state.isPlaying
-	};
-};
-  
-export default connect(mapStateToProps, { changeTrack })(PlaylistCardM);
+export default memo(PlaylistCardM);

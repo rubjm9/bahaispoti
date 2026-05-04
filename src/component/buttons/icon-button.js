@@ -1,5 +1,4 @@
 import React from 'react';
-import * as Icons from '../icons';
 
 import styles from './icon-button.module.css';
 

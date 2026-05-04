@@ -1,5 +1,5 @@
 import useMousePosition from '../../hooks/useMousePosition';
-import {Logo} from '../icons';
+import {BahaiSongsLogo} from '../icons';
 import Playlist from './playlist';
 import Navigation from './navigation'
 
@@ -12,7 +12,7 @@ function Sidebar() {
   const { x } = useMousePosition();
 
     useEffect(() => {
-      if (!isMouseDown) return false;
+      if (!isMouseDown) return;
   
       const handleMove = () => {
         if(x > 200 && x < 316){
@@ -30,13 +30,13 @@ function Sidebar() {
         document.removeEventListener("mousemove", handleMove);
         document.removeEventListener("mouseup", handleUp);
       };
-    });
+    }, [isMouseDown, x]);
 
     return (
       <nav className={styles.SideNavbar} style={{width: `${width}px`}}>
         <div className={styles.Fixed}>
           <div>
-              <Logo/>
+              <BahaiSongsLogo/>
           </div>
           <div>
               <Navigation />

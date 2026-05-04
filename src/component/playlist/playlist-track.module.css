@@ -42,6 +42,18 @@
 .trackDiv:hover .playBtn{
     opacity: 1;
 }
+
+.songLink {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    width: 100%;
+}
+
+.songLink:hover {
+    text-decoration: none;
+    color: inherit;
+}
 @media screen and (max-width: 640px) {
     .trackDiv{
         padding: 0;

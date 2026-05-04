@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import TitleM from '../component/text/title-m';
 import Topnav from '../component/topnav/topnav';
 import PlaylistCardM from '../component/cards/playlist-card-m'
@@ -11,10 +12,12 @@ function Library(){
         <div className={styles.LibPage}>
                 <Topnav tabButtons={true}/>
                 <div className={styles.Library}>
-                        <Route exact path="/library"><PlaylistTab /></Route>
-                        <Route path="/library/podcasts"><PodcastTab /></Route>
-                        <Route path="/library/artists"><ArtistTab /></Route>
-                        <Route path="/library/albums"><AlbumTab /></Route>
+                        <Routes>
+                            <Route index element={<PlaylistTab />} />
+                            <Route path="podcasts" element={<PodcastTab />} />
+                            <Route path="artists" element={<ArtistTab />} />
+                            <Route path="albums" element={<AlbumTab />} />
+                        </Routes>
                 </div>
         </div>
     );
@@ -25,7 +28,7 @@ function PlaylistTab(){
         <div>
             <TitleM>Çalma Listeleri</TitleM>
             <div className={styles.Grid}>
-                {PLAYLIST.filter(item => item.type == 'playlist').map((item) => {
+                {PLAYLIST.filter(item => item.type === 'playlist').map((item) => {
                     return (
                         <PlaylistCardM 
                             key={item.title}
@@ -43,7 +46,7 @@ function PodcastTab(){
         <div>
             <TitleM>Podcast'ler</TitleM>
             <div className={styles.Grid}>
-                {PLAYLIST.filter(item => item.type == 'podcast').map((item) => {
+                {PLAYLIST.filter(item => item.type === 'podcast').map((item) => {
                     return (
                         <PlaylistCardM 
                             key={item.title}
@@ -69,7 +72,7 @@ function AlbumTab(){
         <div>
             <TitleM>Albümler</TitleM>
             <div className={styles.Grid}>
-                {PLAYLIST.filter(item => item.type == 'albüm').map((item) => {
+                {PLAYLIST.filter(item => item.type === 'álbum').map((item) => {
                     return (
                         <PlaylistCardM 
                             key={item.title}

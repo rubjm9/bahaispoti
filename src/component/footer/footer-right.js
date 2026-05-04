@@ -19,7 +19,7 @@ function SoundLevel({ volume, setVolume }){
     const[lastVolume, setLastVolume] = useState(1);
 
     const soundBtn = () => {
-        if(volume == 0){
+        if(volume === 0){
             setVolume(lastVolume);
         }else{
             setLastVolume(volume);

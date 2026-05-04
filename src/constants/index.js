@@ -1,39 +1,53 @@
 import * as Icon from '../component/icons'
 import React from 'react'
 
-export default {
+const CONSTANTS = {
   MOBILE_SIZE: 640,
 }
 
+export default CONSTANTS;
+
 export const MENU = [
   {
-    title: 'Ana sayfa',
+    title: 'Inicio',
     path: '/',
     icon: <Icon.Home />,
     iconSelected: <Icon.HomeActive />
   },
   {
-    title: 'Ara',
+    title: 'Buscar',
     path: '/search',
     icon: <Icon.Search />,
     iconSelected: <Icon.SearchActive />
   },
   {
-    title: 'Kitaplığın',
+    title: 'Tu biblioteca',
     path: '/library',
     icon: <Icon.Library />,
     iconSelected: <Icon.LibraryActive />
+  },
+  {
+    title: 'Favoritos',
+    path: '/favorites',
+    icon: <Icon.Like />,
+    iconSelected: <Icon.LikeActive />
+  },
+  {
+    title: 'Historial',
+    path: '/history',
+    icon: <Icon.Time />,
+    iconSelected: <Icon.Time />
   }
 ]
 
 export const PLAYLISTBTN = [
     {
-      title: 'Çalma Listesi Oluştur',
+      title: 'Crear lista de reproducción',
       path: '/',
       ImgName: 'createPlaylist',
     },
     {
-      title: 'Beğenilen Şarkılar',
+      title: 'Canciones que te gustan',
       path: '/',
       ImgName: 'popularSong',
     }
@@ -41,19 +55,19 @@ export const PLAYLISTBTN = [
 
 export const LIBRARYTABS = [
   {
-    title: 'Çalma Listeleri',
+    title: 'Listas de reproducción',
     path: '/library'
   },
   {
-    title: 'Podcast\'ler',
+    title: 'Podcasts',
     path: '/library/podcasts'
   },
   {
-    title: 'Sanatçılar',
+    title: 'Artistas',
     path: '/library/artists'
   },
   {
-    title: 'Albümler',
+    title: 'Álbumes',
     path: '/library/albums'
   }
 ]

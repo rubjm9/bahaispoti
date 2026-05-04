@@ -1,12 +1,12 @@
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import * as Icons from '../icons';
 
 function PrevPageBtn() {
-    let history = useHistory();
+    const navigate = useNavigate();
 
     return (
             <button className="PrevBtn" onClick={() => {
-                history.goBack();
+                navigate(-1); // goBack equivalent
             }}>
                 <Icons.Prevpage />
             </button>

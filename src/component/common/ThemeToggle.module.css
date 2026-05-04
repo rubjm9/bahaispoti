@@ -1,0 +1,17 @@
+.themeToggle {
+    background: transparent;
+    border: none;
+    color: var(--text-gray);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.themeToggle:hover {
+    color: var(--text-white);
+    background: var(--sidenav-active);
+}

@@ -15,6 +15,37 @@
     grid-template-columns: repeat(auto-fill,minmax(180px,1fr));
     padding-top: 16px;
 }
+.searchSection {
+    margin-top: 2rem;
+}
+.searchResults {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.searchResultItem {
+    padding: 0.75rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.searchResultItem:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.searchResultItem a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+.noResults {
+    margin-top: 3rem;
+    text-align: center;
+    padding: 2rem;
+}
+.noResults > * {
+    margin-bottom: 1rem;
+}
 @media screen and (max-width: 640px) {
     .Search{
         padding: 16px;

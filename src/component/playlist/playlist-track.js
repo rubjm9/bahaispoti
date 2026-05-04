@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { connect } from 'react-redux';
-import { changePlay } from '../../actions';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { playPause } from '../../store/slices/playerSlice';
+import { selectTrackData, selectIsPlaying } from '../../store/slices/playerSlice';
 import TextBoldL from "../text/text-bold-l";
 import TextRegularM from "../text/text-regular-m";
 import Playgif from '../../image/now-play.gif';
@@ -9,32 +11,31 @@ import * as Icons from '../icons';
 import styles from "./playlist-track.module.css";
 
 function PlaylistTrack(props) {
+    const dispatch = useDispatch();
+    const trackData = useSelector(selectTrackData);
+    const isPlaying = useSelector(selectIsPlaying);
     const [thisSong, setthisSong] = useState(false);
-
-    /*setInterval(function(){
-        setthisSong(props.data.song.link == localStorage.getItem('playedSong'));
-    }, 50);*/
     
     useEffect(() => {
-        if(props.data.song.link === props.trackData.track && props.isPlaying === true){
+        if(props.data.song.link === trackData.track && isPlaying === true){
             setthisSong(true)
         }else {
             setthisSong(false)
         }
-	})
+	}, [props.data.song.link, trackData.track, isPlaying])
     
 	return (
 		<div 
             className={`${styles.trackDiv} ${thisSong ? "activeTrack" : ""}`}
             style={
-                props.data.listType === "albüm" 
+                props.data.listType === "álbum" 
                     ? {gridTemplateColumns: '16px 1fr 38px'} 
                     : {}
             }
         >   
             <button
                 className={styles.playBtn}
-                onClick={() => props.changePlay(!props.isPlaying)}
+                onClick={() => dispatch(playPause(!isPlaying))}
             >
                 {thisSong 
                     ? <Icons.Pause /> 
@@ -47,11 +48,13 @@ function PlaylistTrack(props) {
                     : <p className={styles.SongIndex}>{props.data.song.index}</p>
             }
 
-			{props.data.listType === "albüm" ? "" : <img src={props.data.song.songimg} />}
+			{props.data.listType === "álbum" ? "" : <img src={props.data.song.songimg} />}
 
 			<span>
-				<TextBoldL>{props.data.song.songName}</TextBoldL>
-				<TextRegularM>{props.data.song.songArtist}</TextRegularM>
+				<Link to={`/song/${props.data.song.index}`} className={styles.songLink}>
+					<TextBoldL>{props.data.song.songName}</TextBoldL>
+					<TextRegularM>{props.data.song.songArtist}</TextRegularM>
+				</Link>
 			</span>
 
 			<p>{props.data.song.trackTime}</p>
@@ -60,11 +63,4 @@ function PlaylistTrack(props) {
 }
 
 
-const mapStateToProps = (state) => {
-	return {
-		isPlaying: state.isPlaying,
-        trackData: state.trackData
-	};
-};
-  
-export default connect(mapStateToProps, { changePlay })(PlaylistTrack);
+export default PlaylistTrack;
